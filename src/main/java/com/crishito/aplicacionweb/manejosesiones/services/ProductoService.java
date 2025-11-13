@@ -1,9 +1,21 @@
 package com.crishito.aplicacionweb.manejosesiones.services;
 
-import com.crishito.aplicacionweb.manejosesiones.models.Producto;
+/*
+ *Autor: Christian Zumárraga
+ * Fecha: 7/11/2025
+ * Descripción: Esta Interface, es una plantilla para luego implementar un objeto y modificar el desarrollador
+ */
 
+import com.crishito.aplicacionweb.manejosesiones.models.Producto;
 import java.util.List;
 
+/*
+ *Autor: Christian Zumárraga
+ * Fecha: 7/11/2025
+ * Descripción: Esta Interface, es una plantilla para luego implementar un objeto y modificar el desarrollador
+ */
 public interface ProductoService {
+
+    /* Método que devuelve lista de productos */
     List<Producto> listar();
 }

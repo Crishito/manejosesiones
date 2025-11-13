@@ -1,27 +1,42 @@
 package com.crishito.aplicacionweb.manejosesiones.models;
 
-public class Producto {
-    private Long id;
-    private String nombre;
-    private String tipo;
-    private int precio;
+/*
+ *Autor: Christian Zumárraga
+ * Fecha: 12/11/2025
+ * Descripción: Esta clase Producto va a instanciar todos nuestros modelos y atributos
+ */
 
+public class Producto {
+
+    //Declaramos la variables de mi objeto producto
+    private Long idProducto;
+    private String nombre;
+    private String categoria;
+    private Double precio;
+
+    /*
+     * Constructor vacío obligatorio para JavaBeans
+     */
     public Producto() {
     }
 
-    public Producto(Long id, String nombre, String tipo, int precio) {
-        this.id = id;
+    /*
+     * Sobre carga de constructores
+     */
+    public Producto(Long idProducto, String nombre, String categoria, Double precio) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
-        this.tipo = tipo;
+        this.categoria = categoria;
         this.precio = precio;
     }
 
-    public Long getId() {
-        return id;
+    // metodos getter a setter
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdProducto() {
+        return idProducto;
     }
 
     public String getNombre() {
@@ -32,19 +47,19 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public int getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 }

@@ -1,21 +1,24 @@
 package com.crishito.aplicacionweb.manejosesiones.services;
 
-
+/*
+ *Autor: Christian Zumárraga
+ * Fecha: 12/11/2025
+ * Descripción: Esta clase Producto va a instanciar todos nuestros modelos y atributos
+ */
 
 import com.crishito.aplicacionweb.manejosesiones.models.Producto;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class ProductoServiceImpl implements ProductoService {
 
+    /* Sobreescribimos el método */
     @Override
     public List<Producto> listar() {
-        // Simulación de productos en memoria
         return Arrays.asList(
-                new Producto(1L, "Laptop ASUS", "computadora", 1500),
-                new Producto(2L, "Teclado Mecánico", "teclado", 150),
-                new Producto(3L, "Monitor curvo 27", "monitor", 800)
+                new Producto(1L, "Laptop", "Computación", 250.25),
+                new Producto(2L, "Refrigeradora", "Cocina", 745.13),
+                new Producto(3L, "Cama", "Dormitorio", 350.12)
         );
     }
 }
