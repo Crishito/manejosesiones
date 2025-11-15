@@ -53,9 +53,9 @@ public class ProductoServlet extends HttpServlet {
             // Mensaje de bienvenida condicional con alerta Bootstrap
             if (usernameOptional.isPresent())
             {
-                out.println("  <div class=\"alert alert-success text-center\" role=\"alert\">Hola <strong>" + usernameOptional.get() + "</strong>, ¡Bienvenido!</div>");
+                out.println("    <div class=\"alert alert-success text-center\" role=\"alert\">Hola <strong>" + usernameOptional.get() + "</strong>, ¡Bienvenido!</div>");
             } else {
-                out.println("  <div class=\"alert alert-warning text-center\" role=\"alert\">Inicia sesión para ver los precios.</div>");
+                out.println("    <div class=\"alert alert-warning text-center\" role=\"alert\">Inicia sesión para ver los precios.</div>");
             }
 
             // Enlace para Ver Carrito (Se mantiene el texto por claridad)
