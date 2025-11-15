@@ -17,8 +17,8 @@
   Muestra los ítems guardados en la sesión y calcula el total.
 --%>
 <%--
-  Vista del Carrito de Compras.
-  Muestra los ítems guardados en la sesión y calcula el total.
+Vista del Carrito de Compras.
+ Muestra los ítems guardados en la sesión y calcula el total.
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8"
