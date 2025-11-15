@@ -1,24 +1,31 @@
 package com.crishito.aplicacionweb.manejosesiones.services;
 
-/*
- *Autor: Christian Zumárraga
- * Fecha: 12/11/2025
- * Descripción: Esta clase Producto va a instanciar todos nuestros modelos y atributos
- */
-
 import com.crishito.aplicacionweb.manejosesiones.models.Producto;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-public class ProductoServiceImpl implements ProductoService {
+public class ProductoServiceImpl implements ProductoService { // <-- ¡ESTO ES LA CLASE DE IMPLEMENTACIÓN!
 
-    /* Sobreescribimos el método */
     @Override
     public List<Producto> listar() {
         return Arrays.asList(
-                new Producto(1L, "Laptop", "Computación", 250.25),
-                new Producto(2L, "Refrigeradora", "Cocina", 745.13),
-                new Producto(3L, "Cama", "Dormitorio", 350.12)
+                // Asegúrate de que los precios sean Double
+                new Producto(1L, "notebook", "computacion", 175000.0),
+                new Producto(2L, "mesa escritorio", "oficina", 100000.0),
+                new Producto(3L, "teclado mecanico", "computacion", 40000.0)
         );
+    }
+
+    @Override
+    public Optional<Producto> porId(Long id) {
+        /*
+         * Se utiliza streams para buscar el producto.
+         * Importante: Usamos p.getIdProducto() para coincidir con tu clase Producto.
+         */
+        return listar().stream()
+                .filter(p -> p.getIdProducto().equals(id))
+                .findAny();
     }
 }

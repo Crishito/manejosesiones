@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
         // Si el usuario ya está logueado (en sesión)
         if (usernameOptional.isPresent()) {
-            // --- INICIO DE IMPLEMENTACIÓN DEL CONTADOR ---
+            // contador
             HttpSession session = req.getSession(); // Obtenemos la sesión actual
             Integer contador = (Integer) session.getAttribute(CONTADOR_SESSION);
 
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
                 contador++;
             }
             session.setAttribute(CONTADOR_SESSION, contador);
-            // --- FIN DE IMPLEMENTACIÓN DEL CONTADOR ---
+
 
             resp.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = resp.getWriter()) {

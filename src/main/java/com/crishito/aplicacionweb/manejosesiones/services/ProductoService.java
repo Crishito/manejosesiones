@@ -1,21 +1,15 @@
-package com.crishito.aplicacionweb.manejosesiones.services;
+package com.crishito.aplicacionweb.manejosesiones.services; // ¡PACKAGE CORREGIDO!
 
-/*
- *Autor: Christian Zumárraga
- * Fecha: 7/11/2025
- * Descripción: Esta Interface, es una plantilla para luego implementar un objeto y modificar el desarrollador
- */
+import com.crishito.aplicacionweb.manejosesiones.models.Producto; // ¡PACKAGE CORREGIDO!
 
-import com.crishito.aplicacionweb.manejosesiones.models.Producto;
 import java.util.List;
+import java.util.Optional;
 
-/*
- *Autor: Christian Zumárraga
- * Fecha: 7/11/2025
- * Descripción: Esta Interface, es una plantilla para luego implementar un objeto y modificar el desarrollador
- */
 public interface ProductoService {
 
-    /* Método que devuelve lista de productos */
     List<Producto> listar();
+
+    // Nuevo método para buscar por ID
+    Optional<Producto> porId(Long id);
+
 }
