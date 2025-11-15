@@ -83,7 +83,7 @@ public class VerCarroServlet extends HttpServlet {
             }
         }
 
-        // --- ACCIÓN POR DEFECTO: Mostrar la vista del carrito (carro.jsp) ---
+        //Mostrar la vista del carrito (carro.jsp) ---
         getServletContext().getRequestDispatcher("/carro.jsp").forward(req, resp);
     }
 }

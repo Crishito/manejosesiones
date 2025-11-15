@@ -1,4 +1,4 @@
-package com.crishito.aplicacionweb.manejosesiones.models; // ¡PACKAGE CORREGIDO!
+package com.crishito.aplicacionweb.manejosesiones.models;
 
 import java.util.Objects;
 

@@ -1,10 +1,10 @@
-package com.crishito.aplicacionweb.manejosesiones.controllers; // 🐞 PACKAGE CORREGIDO
+package com.crishito.aplicacionweb.manejosesiones.controllers;
 
-import com.crishito.aplicacionweb.manejosesiones.models.Producto; // 🐞 IMPORT CORREGIDA
-import com.crishito.aplicacionweb.manejosesiones.services.LoginService; // 🐞 IMPORT CORREGIDA
-import com.crishito.aplicacionweb.manejosesiones.services.LoginServiceSessionImpl; // 🐞 Nombre de clase corregido
-import com.crishito.aplicacionweb.manejosesiones.services.ProductoService; // 🐞 IMPORT CORREGIDA
-import com.crishito.aplicacionweb.manejosesiones.services.ProductoServiceImpl; // 🐞 Nombre de clase corregido
+import com.crishito.aplicacionweb.manejosesiones.models.Producto;
+import com.crishito.aplicacionweb.manejosesiones.services.LoginService;
+import com.crishito.aplicacionweb.manejosesiones.services.LoginServiceSessionImpl;
+import com.crishito.aplicacionweb.manejosesiones.services.ProductoService;
+import com.crishito.aplicacionweb.manejosesiones.services.ProductoServiceImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
