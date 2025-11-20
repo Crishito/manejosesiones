@@ -20,6 +20,11 @@ public class Conexion {
     }
 
 
+    /*
+    * Tenemos nuestra Clase Conexión, mediante la conexión, necesito un
+    * método main que verifique so la conexión se realizo correctamente
+    *    o incorrectamente, mediante consola conexión correcta a base
+    * de datos o conexión incorrecta a base de datos.*/
 
     //Metodo main para probar la conexion
     public static void main(String[] args) {

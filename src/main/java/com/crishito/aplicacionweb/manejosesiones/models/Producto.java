@@ -6,13 +6,23 @@ package com.crishito.aplicacionweb.manejosesiones.models;
  * Descripción: Esta clase Producto va a instanciar todos nuestros modelos y atributos
  */
 
+import java.time.LocalDate;
+
 public class Producto {
 
     //Declaramos la variables de mi objeto producto
     private Long idProducto;
     private String nombre;
-    private String categoria;
-    private Double precio;
+    private Categoria categoria;
+    private int stock;
+
+    private String descripcion;
+    private double precio;
+    private String codigo;
+    private LocalDate fechaElaboracion;
+    private LocalDate fechaCaducidad;
+    private int condicion;
+
 
     /*
      * Constructor vacío obligatorio para JavaBeans
@@ -23,20 +33,30 @@ public class Producto {
     /*
      * Sobre carga de constructores
      */
-    public Producto(Long idProducto, String nombre, String categoria, Double precio) {
+
+    public Producto(Long idProducto, String nombre, int stock, String descripcion, double precio, String codigo,String tipo, LocalDate fechaElaboracion, LocalDate fechaCaducidad, int condicion) {
         this.idProducto = idProducto;
         this.nombre = nombre;
-        this.categoria = categoria;
+        Categoria categoria = new Categoria ();
+        categoria.setNombre(tipo);
+        this.stock = stock;
+        this.descripcion = descripcion;
         this.precio = precio;
+        this.codigo = codigo;
+        this.fechaElaboracion = fechaElaboracion;
+        this.fechaCaducidad = fechaCaducidad;
+        this.condicion = condicion;
     }
 
     // metodos getter a setter
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
-    }
+
 
     public Long getIdProducto() {
         return idProducto;
+    }
+
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -47,19 +67,67 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public Double getPrecio() {
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public LocalDate getFechaElaboracion() {
+        return fechaElaboracion;
+    }
+
+    public void setFechaElaboracion(LocalDate fechaElaboracion) {
+        this.fechaElaboracion = fechaElaboracion;
+    }
+
+    public LocalDate getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(LocalDate fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public int getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(int condicion) {
+        this.condicion = condicion;
     }
 }
