@@ -4,20 +4,21 @@ public class Categoria {
     private Long id;
     private String nombre;
     private String descripcion;
-    private String condicion;
+    private int estado; // Modificado de 'String condicion' a 'int estado'
 
+    //Implementamos el constructor vacio
     public Categoria() {
-
     }
-    //Constructor
-    public Categoria(Long id, String nombre, String descripcion, String condicion) {
+
+    //Constructor (ajustado para coincidir con la implementación de Elvis)
+    public Categoria(Long id, int estado, String descripcion, String nombre) {
         this.id = id;
-        this.nombre = nombre;
+        this.estado = estado;
         this.descripcion = descripcion;
-        this.condicion = condicion;
+        this.nombre = nombre;
     }
-    //Metodo getter and setter
 
+    //Implementamos los métodos Getter and setter
     public Long getId() {
         return id;
     }
@@ -42,11 +43,11 @@ public class Categoria {
         this.descripcion = descripcion;
     }
 
-    public String getCondicion() {
-        return condicion;
+    public int getEstado() {
+        return estado;
     }
 
-    public void setCondicion(String condicion) {
-        this.condicion = condicion;
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }

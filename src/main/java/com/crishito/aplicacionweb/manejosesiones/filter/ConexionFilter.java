@@ -1,9 +1,10 @@
 package com.crishito.aplicacionweb.manejosesiones.filter;
 
-
+import com.crishito.aplicacionweb.manejosesiones.services.ServiceJdbcException;
 import com.crishito.aplicacionweb.manejosesiones.util.Conexion;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,43 +13,45 @@ import java.sql.SQLException;
 @WebFilter("/*")
 public class ConexionFilter implements Filter {
     /*
-    * Una clase filtrer en java es un objeto que realiza tareas de filtrar
-    * en las solicitudes en peticiíon y respuesya a un recurso. Los filtros
-    * se pueden ejecutar de manera dinamica para trasformar la
-    * informacion que contiene,. El filtrado se realiza mediante el método doFiltrer () */
+     * Una clase filter en java es un objeto que realiza tareas de filtrado
+     * en las solicitudes de petición y respuesta a un recurs. Los filtros
+     * se pueden ejecutar de manera dinámica para transformar la
+     * información que contienen. El filtrado se realiza medianre el
+     * método doFilter()
+     */
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws
+            IOException, ServletException {
         /*
-        *
-        * request: peticion del cliente
-        * response: respuesta del servidor
-        * chain: Es una clase de filtro qie representa el flujo de procesamiento,
-        * llama al método chain .doFilter (request, response), dentro de un filtro
-        * pasa la solicitud al soguiente fitro o al recurso destino (servlet, jsp,
-        * pdf u otro)
-        * */
+         * request: petición del cliente
+         * response: respuesta del servidor
+         * chain: Es una clase de filtro que representa el flujo de procesamiento,
+         * llama al método chain.doFilter(request, response), dentro de un filtro
+         * pasa la solicitus al siguiente filtro o al recurso destino(servlet, jsp,
+         * pdf u otro)*
+         */
 
         //Llamamos a la conexión
-        try(Connection connection = Conexion.getConnection()){
-            //Verificamos que la conexion no se realice automáticamente
+        try (Connection connection = Conexion.getConnection()) {
+            //Verificamos que la conexión no se realice automáticamente
             if (connection.getAutoCommit()) {
-                //cambiamos a una conexion manual
+                //cambiamos a una conexión manual
                 connection.setAutoCommit(false);
-
             }
-            try{
+
+            try {
                 request.setAttribute("conn", connection);
                 chain.doFilter(request, response);
                 connection.commit();
-            }catch (SQLException e){
+            } catch (SQLException | ServiceJdbcException e) {
                 connection.rollback();
-
+                ((HttpServletResponse)response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                        e.getMessage());
+                e.printStackTrace();
             }
-
-        }catch(SQLException e){
-            throw new RuntimeException(e);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
-
 }

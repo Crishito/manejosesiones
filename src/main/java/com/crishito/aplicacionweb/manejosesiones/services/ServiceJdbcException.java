@@ -1,11 +1,11 @@
 package com.crishito.aplicacionweb.manejosesiones.services;
 
-public class ServiceJdbcExeption extends RuntimeException{
+public class ServiceJdbcException extends RuntimeException{
     /*
     * implementamos un constructor que invoca al constructor padre
     * y recibe un parametro de tipo string llamado mensaje*/
 
-    public ServiceJdbcExeption(String menssage){
+    public ServiceJdbcException(String menssage){
         //Llamamos al constructor padre para mostrar el mensaje
         super(menssage);
 
@@ -16,7 +16,7 @@ public class ServiceJdbcExeption extends RuntimeException{
      * de tipo String message y tambien la causa del error
      */
 
-    public ServiceJdbcExeption(String menssage, Throwable cause){
+    public ServiceJdbcException(String menssage, Throwable cause){
         super(menssage,cause);
     }
 }

@@ -71,7 +71,7 @@ public class VerCarroServlet extends HttpServlet {
                         String linea = String.format("%d;%s;%s;%.2f;%d;%.2f",
                                 item.getProducto().getIdProducto(),
                                 item.getProducto().getNombre().replace(';', ' '),
-                                item.getProducto().getCategoria().replace(';', ' '),
+                                item.getProducto().getCategoria().getNombre().replace(';', ' '), // <-- CORRECCIÓN AQUÍ
                                 item.getProducto().getPrecio(),
                                 item.getCantidad(),
                                 item.getSubtotal());
