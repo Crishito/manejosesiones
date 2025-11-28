@@ -14,14 +14,19 @@ public class Producto {
     private Long idProducto;
     private String nombre;
     private Categoria categoria;
-    private int stock;
+
+    // CORRECCIÓN: Cambiado de 'int' a 'Integer' para permitir valores nulos.
+    private Integer stock;
 
     private String descripcion;
-    private double precio;
+
+    // CORRECCIÓN: Cambiado de 'double' a 'Double' para permitir valores nulos.
+    private Double precio;
+
     private String codigo;
     private LocalDate fechaElaboracion;
     private LocalDate fechaCaducidad;
-    private int condicion;
+    private int condicion; // 'int' está bien aquí ya que es un campo booleano (0 o 1).
 
 
     /*
@@ -32,9 +37,10 @@ public class Producto {
 
     /*
      * Sobre carga de constructores
+     * NOTA: Actualizado para usar Integer y Double.
      */
 
-    public Producto(Long idProducto, String nombre, int stock, String descripcion, double precio, String codigo,String tipo, LocalDate fechaElaboracion, LocalDate fechaCaducidad, int condicion) {
+    public Producto(Long idProducto, String nombre, Integer stock, String descripcion, Double precio, String codigo,String tipo, LocalDate fechaElaboracion, LocalDate fechaCaducidad, int condicion) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         Categoria categoria = new Categoria ();
@@ -75,11 +81,13 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public int getStock() {
+    // GETTER CORREGIDO
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    // SETTER CORREGIDO
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
@@ -91,11 +99,13 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public double getPrecio() {
+    // GETTER CORREGIDO
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    // SETTER CORREGIDO
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 

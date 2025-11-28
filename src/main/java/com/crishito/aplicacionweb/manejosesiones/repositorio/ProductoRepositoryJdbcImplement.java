@@ -12,7 +12,7 @@ public class ProductoRepositoryJdbcImplement implements Repository<Producto> {
     //Declaramos la variable BBDD
     private Connection conn;
 
-    //Obtengo el conexión mediante el constructor
+    //Obtengo la conexión mediante el constructor
     public ProductoRepositoryJdbcImplement(Connection conn) {
         this.conn = conn;
     }
@@ -20,9 +20,16 @@ public class ProductoRepositoryJdbcImplement implements Repository<Producto> {
     @Override
     public List<Producto> listar() throws SQLException {
         List<Producto> productos = new ArrayList<>();
-        // Query adaptado: p.id -> p.idProducto
+
+        // Solo corregido nombres reales de BD
         try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT p.*, c.nombreCategoria as categoria FROM producto as p INNER JOIN categoria as c ON (p.idCategoria = c.id) order by p.id ASC;")) {
+             ResultSet rs = stmt.executeQuery(
+                     "SELECT p.*, c.nombreCategoria AS nombreCategoria " +
+                             "FROM producto AS p " +
+                             "INNER JOIN categoria AS c ON (p.idCategoria = c.id) " +
+                             "ORDER BY p.id ASC"
+             )) {
+
             while (rs.next()) {
                 Producto p = getProducto(rs);
                 productos.add(p);
@@ -35,9 +42,15 @@ public class ProductoRepositoryJdbcImplement implements Repository<Producto> {
     @Override
     public Producto porId(Long id) throws SQLException {
         Producto producto = null;
-        // Query adaptado: p.id -> p.idProducto, c.nombreCategoria -> c.nombre
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT p.*, c.nombre as nombreCategoria FROM productos as p INNER JOIN categorias as c ON (p.idCategoria = c.id) WHERE p.idProducto=?")) {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "SELECT p.*, c.nombreCategoria AS nombreCategoria " +
+                        "FROM producto AS p " +
+                        "INNER JOIN categoria AS c ON (p.idCategoria = c.id) " +
+                        "WHERE p.id = ?"
+        )) {
             stmt.setLong(1, id);
+
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     producto = getProducto(rs);
@@ -50,50 +63,58 @@ public class ProductoRepositoryJdbcImplement implements Repository<Producto> {
     @Override
     public void guardar(Producto producto) throws SQLException {
         String sql;
-        // Se usa getIdProducto()
+
+        // Si tiene id → UPDATE, si no → INSERT
         if (producto.getIdProducto() != null && producto.getIdProducto() > 0) {
-            // Se asume que la tabla tiene las columnas de 'Producto' de Cris
-            sql = "UPDATE productos SET nombre=?, idCategoria=?, stock=?, precio=?, descripcion=?, codigo=?, fecha_elaboracion=?, fecha_caducidad=?, condicion=? where idProducto=?";
+
+            sql = "UPDATE producto SET nombreProducto=?, idCategoria=?, stock=?, precio=?, " +
+                    "descripcion=?, codigo=?, fecha_elaboracion=?, fecha_caducidad=?, condicion=? " +
+                    "WHERE id=?";
+
         } else {
-            // Columnas ajustadas para la tabla de Cris/Elvis
-            sql = "INSERT INTO productos(nombre, idCategoria, stock, precio, descripcion, condicion, fecha_elaboracion, fecha_caducidad, codigo) values(?,?,?,?,?,?,?,?,?)";
+
+            sql = "INSERT INTO producto(nombreProducto, idCategoria, stock, precio, descripcion, " +
+                    "codigo, fecha_elaboracion, fecha_caducidad, condicion) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }
+
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Orden corregido según tu BD real
             stmt.setString(1, producto.getNombre());
-            // Se asume que Categoria tiene un método getId() válido.
             stmt.setLong(2, producto.getCategoria().getId());
             stmt.setInt(3, producto.getStock());
             stmt.setDouble(4, producto.getPrecio());
             stmt.setString(5, producto.getDescripcion());
-            stmt.setInt(6, producto.getCondicion());
+            stmt.setString(6, producto.getCodigo());
             stmt.setDate(7, Date.valueOf(producto.getFechaElaboracion()));
             stmt.setDate(8, Date.valueOf(producto.getFechaCaducidad()));
+            stmt.setInt(9, producto.getCondicion());
 
-            // Si es INSERT, usamos el campo 9 para 'codigo'. Si es UPDATE, el 9 es 'condicion' y el 10 es 'idProducto'.
             if (producto.getIdProducto() != null && producto.getIdProducto() > 0) {
-                // UPDATE
-                stmt.setString(6, producto.getCodigo());
-                stmt.setLong(10, producto.getIdProducto());
-            } else {
-                // INSERT
-                stmt.setString(9, producto.getCodigo());
+                stmt.setLong(10, producto.getIdProducto()); // WHERE id=?
             }
+
             stmt.executeUpdate();
         }
     }
 
     @Override
     public void eliminar(Long id) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM productos WHERE idProducto=?")) {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM producto WHERE id=?")) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         }
     }
 
     private static Producto getProducto(ResultSet rs) throws SQLException {
+
         Producto p = new Producto();
-        p.setIdProducto(rs.getLong("idProducto")); // Columna ID cambiada a idProducto
-        p.setNombre(rs.getString("nombre"));
+
+        // En tu BD la columna es id, no idProducto
+        p.setIdProducto(rs.getLong("id"));
+
+        p.setNombre(rs.getString("nombreProducto"));
         p.setDescripcion(rs.getString("descripcion"));
         p.setPrecio(rs.getDouble("precio"));
         p.setStock(rs.getInt("stock"));
@@ -105,9 +126,9 @@ public class ProductoRepositoryJdbcImplement implements Repository<Producto> {
         //Creamos un nuevo objeto de tipo categoria
         Categoria categoria = new Categoria();
         categoria.setId(rs.getLong("idCategoria"));
-        // El alias de la consulta es 'nombreCategoria', pero la clase Categoria tiene 'nombre'
         categoria.setNombre(rs.getString("nombreCategoria"));
         p.setCategoria(categoria);
+
         return p;
     }
 }

@@ -16,7 +16,7 @@
         <junit.version>5.13.2</junit.version>
     </properties>
 
-<packaging>war</packaging>
+    <packaging>war</packaging>
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>

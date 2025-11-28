@@ -5,7 +5,7 @@ import com.crishito.aplicacionweb.manejosesiones.models.DetalleCarro;
 import com.crishito.aplicacionweb.manejosesiones.models.ItemCarro;
 import com.crishito.aplicacionweb.manejosesiones.models.Producto;
 import com.crishito.aplicacionweb.manejosesiones.services.ProductoService;
-import com.crishito.aplicacionweb.manejosesiones.services.ProductoServiceJdbcImpl; // Nuevo import
+import com.crishito.aplicacionweb.manejosesiones.services.ProductoServiceJdbcImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.Connection; // Nuevo import
+import java.sql.Connection;
 import java.util.Optional;
 
 

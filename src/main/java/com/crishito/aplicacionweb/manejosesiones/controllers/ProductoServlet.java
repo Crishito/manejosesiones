@@ -4,31 +4,25 @@ import com.crishito.aplicacionweb.manejosesiones.models.Producto;
 import com.crishito.aplicacionweb.manejosesiones.services.LoginService;
 import com.crishito.aplicacionweb.manejosesiones.services.LoginServiceSessionImpl;
 import com.crishito.aplicacionweb.manejosesiones.services.ProductoService;
-import com.crishito.aplicacionweb.manejosesiones.services.ProductoServiceJdbcImpl; // Nuevo import
-
+import com.crishito.aplicacionweb.manejosesiones.services.ProductoServiceJdbcImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection; // Nuevo import
+import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-
 @WebServlet({"/productos.html", "/productos"})
 public class ProductoServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
-
         // Traemos la conexión
-        Connection conn = (Connection) req.getAttribute("conn");
-
+        Connection conn = (Connection)
+                req.getAttribute("conn");
         // Instanciamos el objeto ProductoServiceJdbcImpl
         ProductoService service = new ProductoServiceJdbcImpl(conn);
         List<Producto> productos = service.listar();
@@ -36,9 +30,9 @@ public class ProductoServlet extends HttpServlet {
         LoginService auth = new LoginServiceSessionImpl();
         Optional<String> usernameOptional = auth.getUsername(req);
 
-        resp.setContentType("text/html;charset=UTF-8");
+        //resp.setContentType("text/html;charset=UTF-8");
 
-        try (PrintWriter out =
+       /* try (PrintWriter out =
                      resp.getWriter()) {
 
             // 1. Estructura HTML y
@@ -68,7 +62,7 @@ public class ProductoServlet extends HttpServlet {
             }
 
             // Enlace para Ver Carrito
-            // (Se mantiene el texto por claridad)
+            //
             out.println("<div class=\"text-end mb-3\">");
             out.println("<a href=\"" + req.getContextPath() + "/ver-carro\" class=\"btn btn-info\"><i class=\"bi bi-cart\"></i> Ver Carrito</a>");
             out.println("</div>");
@@ -120,10 +114,10 @@ public class ProductoServlet extends HttpServlet {
                             + req.getContextPath()
                             + "/agregar-carro?id=" + p.getIdProducto() + "\""
                             + " class=\"btn btn-sm btn-success\"><i class=\"bi bi-cart-plus\"></i></a></td>");
-                } // <--- CIERRE CORRECTO del IF
+                } //
 
-                out.println(" </tr>"); // <--- CIERRE CORRECTO de la FILA
-            }); // <--- CIERRE CORRECTO del forEach
+                out.println(" </tr>");
+            });
 
             // Cierre de la tabla y
             // estructura HTML (FUERA DEL BUCLE)
@@ -139,6 +133,11 @@ public class ProductoServlet extends HttpServlet {
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");
-        }
+        }*/
+        req.setAttribute("productos", productos);
+        req.setAttribute("username", usernameOptional);
+
+        getServletContext().getRequestDispatcher("/producto.jsp").forward(req, resp);
+
     }
 }

@@ -1,5 +1,4 @@
-
-package com.crishito.aplicacionweb.manejosesiones.util; // Paquete asumido
+package com.crishito.aplicacionweb.manejosesiones.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
